@@ -10,6 +10,7 @@ import {
   TemplateRef
 } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
+import { GradientOrientation } from '../common/svg-linear-gradient.component';
 import { scaleLinear, scaleTime, scalePoint } from 'd3-scale';
 import { curveLinear } from 'd3-shape';
 
@@ -89,6 +90,7 @@ import { LegendOptions, LegendPosition, ScaleType, ViewDimensions } from '../com
               [rangeFillOpacity]="rangeFillOpacity"
               [hasRange]="hasRange"
               [animations]="animations"
+              [gradientOrientation]='gradientOrientation'
             />
           </svg:g>
 
@@ -150,6 +152,7 @@ import { LegendOptions, LegendPosition, ScaleType, ViewDimensions } from '../com
             [curve]="curve"
             [hasRange]="hasRange"
             [animations]="animations"
+            [gradientOrientation]='gradientOrientation'
           />
         </svg:g>
       </svg:g>
@@ -187,6 +190,7 @@ export class LineChartComponent extends BaseChartComponent {
   @Input() autoScale: boolean;
   @Input() timeline: boolean;
   @Input() gradient: boolean;
+  @Input() gradientOrientation: GradientOrientation = GradientOrientation.Vertical;
   @Input() showGridLines: boolean = true;
   @Input() curve: any = curveLinear;
   @Input() activeEntries: any[] = [];

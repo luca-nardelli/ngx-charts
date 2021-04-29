@@ -1,11 +1,12 @@
-import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { GradientOrientation } from '../common/svg-linear-gradient.component';
 import { area, line } from 'd3-shape';
+import { ColorHelper } from '../common/color.helper';
+import { Gradient, ScaleType } from '../common/types';
+import { Series } from '../models/chart-data.model';
 
 import { id } from '../utils/id';
-import { sortLinear, sortByTime, sortByDomain } from '../utils/sort';
-import { ColorHelper } from '../common/color.helper';
-import { ScaleType, Gradient } from '../common/types';
-import { Series } from '../models/chart-data.model';
+import { sortByDomain, sortByTime, sortLinear } from '../utils/sort';
 
 @Component({
   selector: 'g[ngx-charts-line-series]',
@@ -29,6 +30,7 @@ import { Series } from '../models/chart-data.model';
         [opacity]="0.25"
         [startOpacity]="0"
         [gradient]="true"
+        [gradientOrientation]='gradientOrientation'
         [stops]="areaGradientStops"
         [class.active]="isActive(data)"
         [class.inactive]="isInactive(data)"
@@ -71,6 +73,7 @@ export class LineSeriesComponent implements OnChanges {
   @Input() rangeFillOpacity: number;
   @Input() hasRange: boolean;
   @Input() animations: boolean = true;
+  @Input() gradientOrientation: GradientOrientation = GradientOrientation.Vertical;
 
   path: string;
   outerPath: string;
